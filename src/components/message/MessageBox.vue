@@ -18,21 +18,23 @@ export default class MessageBox extends Vue {
   type: MessageType = '';
   message: string = '';
   duration: number = 2000;
-  timer: Number = 0;
+
+  timer: number = 0;
   closed: boolean = false;
 
   startTimer() {
     if (this.duration > 0) {
+      clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         if (!this.closed) {
-          this.visible = false;
+          this.close();
         }
       }, this.duration);
     }
   }
 
   close() {
-    this.closed = true;
+    this.visible = false;
   }
 
   keydown(e: KeyboardEvent) {

@@ -14,37 +14,11 @@
                 <el-button type="primary" @click="handlertest">确定</el-button>
             </el-form-item>
         </el-form>
-        <!--        <el-carousel showIndicator autoplay trigger="hover" arrow="always" height="300px" width="400px">-->
-        <!--            <el-carousel-item>-->
-        <!--                <div class="center" style="background-color: gray">1</div>-->
-        <!--            </el-carousel-item>-->
-        <!--            <el-carousel-item>-->
-        <!--                <div class="center" style="background-color: #2c3e50">2</div>-->
-        <!--            </el-carousel-item>-->
-        <!--            <el-carousel-item>-->
-        <!--                <div class="center" style="background-color: yellowgreen">3</div>-->
-        <!--            </el-carousel-item>-->
-        <!--        </el-carousel>-->
-        <!--        <el-collapse accordion v-model="activeName">-->
-        <!--            <el-collapse-item title="学习" name="1">-->
-        <!--                我要好好学习-->
-        <!--            </el-collapse-item>-->
-        <!--            <el-collapse-item title="学习2" name="2">-->
-        <!--                我要好好学习22-->
-        <!--            </el-collapse-item>-->
-        <!--        </el-collapse>-->
-        <!--        <el-row :gutter="30">-->
-        <!--            <el-col :span="1">-->
-        <!--                <div style="background: #2c3e50">1</div>-->
-        <!--            </el-col>-->
-        <!--            <el-col :span="1">-->
-        <!--                <div style="background: gray">2</div>-->
-        <!--            </el-col>-->
-        <!--            <el-col :span="1">-->
-        <!--                <div style="background: gray">3</div>-->
-        <!--            </el-col>-->
-        <!--        </el-row>-->
         <elDatePick v-model="str"></elDatePick>
+        <SlotScope>
+            <template #header="{user}">{{user}}</template>
+            <template slot-scope="{user}" slot="main">{{user}}</template>
+        </SlotScope>
     </div>
 </template>
 
@@ -53,9 +27,10 @@ import rule from '@/utils/rules';
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import ElCollapse from '@/components/collapse/Collapse.vue';
 import ElRow from '@/components/layout/Row.vue';
+import SlotScope from './SlotScope.vue';
 
 @Component({
-  components: { ElRow, ElCollapse }
+  components: { ElRow, ElCollapse, SlotScope }
 })
 export default class Home extends Vue {
   rule: Rules = rule;
@@ -67,8 +42,13 @@ export default class Home extends Vue {
   activeName = [];
 
   handlertest() {
-    const o = this.$refs['ruledom'] as any;
-    o.validate();
+    this.$message.success({ message: 'xxx' });
+    // this.$message({
+    //   type: 'success',
+    //   message: 'xxx'
+    // });
+    // const o = this.$refs['ruledom'] as any;
+    // o.validate();
   }
 }
 </script>
